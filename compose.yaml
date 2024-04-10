@@ -27,9 +27,6 @@ services:
         - serverside
     volumes:
       - db-data:/var/lib/postgresql/data
-
-
-
 networks:
   serverside:
 volumes:

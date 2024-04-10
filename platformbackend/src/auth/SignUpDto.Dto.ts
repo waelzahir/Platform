@@ -1,31 +1,40 @@
-import { IsAlpha,  IsAlphanumeric,  IsEmail, IsEnum, IsStrongPassword, Max, Min} from "class-validator";
+import { IsAlpha,  IsAlphanumeric,  IsEmail, IsEnum, IsString, IsStrongPassword, Max, MaxLength, Min, MinLength} from "class-validator";
 import { accounttype } from "@prisma/client";
 
 
 export class AuthDto
 {
-    @IsAlphanumeric()
-    @Min(4)
-    @Max(10)
+    @IsAlpha()
+    @MinLength(6)
+    @MaxLength(10)
     Username: string
 
-    // @IsAlpha()
-    // @Min(4)
-    // @Max(10)
-    // firstname: string
+    @IsAlpha()
+    @MinLength(4)
+    @MaxLength(10)
+    firstname: string
     
-    // @IsAlpha()
-    // @Min(4)
-    // @Max(10)
-    // lastname: string
+    @IsAlpha()
+    @MinLength(4)
+    @MaxLength(10)
+    lastname: string
 
-    // @IsEmail()
-    // email: string
+    @IsEnum(accounttype)
+    accountType: accounttype
 
-    // @IsEnum(accounttype)
-    // accountType: accounttype
+    @IsStrongPassword()
+    @MinLength(6)
+    Password: string
+}
 
-    // @IsStrongPassword()
-    // @Min(6)
-    // Password: string
+export class Authin
+{
+    @IsAlpha()
+    @MinLength(6)
+    @MaxLength(10)
+    Username: string
+
+    @IsStrongPassword()
+    @MinLength(6)
+    Password: string
 }

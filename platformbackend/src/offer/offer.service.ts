@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { OfferDto } from 'src/common/Dtos/Offer.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -27,59 +27,61 @@ export class OfferService {
     async getOffersbytitle (search: string, offset: number)
     {
         const job = typeof search === 'undefined' ? "" : search;
-        return await this.prisma.offer.findMany(
-            {
-                where:{
-                    OR : [
-                       {
-                            title :{
-                                startsWith:search,
-                            }
-                       },
-                       {
-                        title :{
-                            endsWith:search,
+        try
+        {
+            return await this.prisma.offer.findMany(
+                {
+                    where:{
+                        Company :{
+                            contains:job,
                         }
-                       }
-                    ]
-                },
-                skip: 30 * offset,
-                take: 30,
-            }
-        )
+                    },
+                    skip: 30 * offset,
+                    take: 30,
+                }
+            )
+        } 
+        catch {
+            throw new HttpException("Bad Request: Area GTT", HttpStatus.BAD_REQUEST)
+        }
     }
     async getOffersbyCompany (search: string, offset: number)
     {
-        const job = typeof search === 'undefined' ? "" : search;
-        return await this.prisma.offer.findMany(
-            {
-                where:{
-                    OR : [
-                       {
-                            Company :{
-                                startsWith:search,
-                            }
-                       },
-                       {
+        const com = typeof search === 'undefined' ? "" : search;
+        try
+        {
+            return await this.prisma.offer.findMany(
+                {
+                    where:{
                         Company :{
-                            endsWith:search,
+                            contains:com,
                         }
-                       }
-                    ]
-                },
-                skip: 30 * offset,
-                take: 30,
-            }
-        )
+                    },
+                    skip: 30 * offset,
+                    take: 30,
+                }
+            )
+        
+        } 
+        catch {
+            throw new HttpException("Bad Request: Area GTC", HttpStatus.BAD_REQUEST)
+        }
     }
 
     async getoffers (offset:number)
     {
-        return await this.prisma.offer.findMany(
-            {
-                skip: 30 * offset,
-                take: 30,
-            }
-        )
+        console.log(offset)
+        try
+        {
+            return await this.prisma.offer.findMany(
+                {
+                    skip: 30 * offset,
+                    take: 30,
+                }
+            )
+        } 
+        catch {
+            throw new HttpException("Bad Request: Area GTO", HttpStatus.BAD_REQUEST)
+        }
     }
 }

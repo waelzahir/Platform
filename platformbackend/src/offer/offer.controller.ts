@@ -29,9 +29,9 @@ export class OfferController {
   {
     const index = !Number.isNaN(offset) && offset > 0  ? offset : 0;
     if (type === "title")
-        return await this.offerService.getOffersbytitle(search, offset);
+        return await this.offerService.getOffersbytitle(search, index);
     if (type === "Company")
-      return await this.offerService.getOffersbyCompany(search, offset);
-    return await this.offerService.getoffers(offset);
+      return await this.offerService.getOffersbyCompany(search, index);
+    return await this.offerService.getoffers(index);
   }
 }

@@ -1,3 +1,4 @@
+import { USER } from "../Context/Authcontext"
 import BackEndUrl from "../coreutils/backendurl"
 
 export const login = async (creds :any) => {
@@ -20,11 +21,13 @@ export const signup = async (creds :any) => {
     )
 }
 
-export const logout = async () => {
+export const logout = async (setUser:React.Dispatch<React.SetStateAction<USER | null>>) => {
     const res  = await fetch(`${BackEndUrl}/Logout`, 
         {
             method: "POST",
             credentials: "include",
         }
     )
+    if (res.ok)
+        setUser(null)
 }

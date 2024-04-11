@@ -2,7 +2,7 @@ import { Body, Controller, Get, HttpException, Post, Req, Res } from '@nestjs/co
 import { AuthService } from './auth.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthDto, Authin } from '../common/Dtos/SignUpDto.Dto';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -12,17 +12,21 @@ export class AuthController {
   
 
   @Post("signup")
-  async signup(@Res() response: Response,   @Body() User: AuthDto){
-    console.log(User)  
+  async signup( @Req() req: Request, @Res() response: Response,   @Body() User: AuthDto){
+    console.log(User, req)
     const {user, JWT} = await this.authService.signupuser(User);
+    console.log(JWT)
     response.cookie("AccesToken", JWT, {
       httpOnly: true,
       secure: false,
-      maxAge:  15 * 60,
+      maxAge:  15 * 60 * 1000,
+    });
+    response.cookie("test", "test", {
+      httpOnly: true,
     });
     response.cookie("UserData", JSON.stringify(user), {
-			httpOnly: false,
-		});
+      httpOnly: false,
+    });
     response.end()
   }
 
@@ -34,7 +38,7 @@ export class AuthController {
     response.cookie("AccesToken", JWT, {
       httpOnly: true,
       secure: false,
-      maxAge:  15 * 60,
+      maxAge:  15 * 60 * 1000,
     });
     response.cookie("UserData", JSON.stringify(user), {
 			httpOnly: false,
@@ -44,8 +48,8 @@ export class AuthController {
 
   @Get("Logout")
   async Logout(@Res() response : Response) {
-    response.cookie("AccesToken", "", { expires: new Date(Date.now()) });
-    response.cookie("UserData", "", { expires: new Date(Date.now()) });
+    response.cookie("AccesToken", "", { maxAge:0 , httpOnly: true, secure:false});
+    response.cookie("UserData", "", { maxAge:0 });
     response.end()
   }
 }

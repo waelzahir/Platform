@@ -22,8 +22,6 @@ export class AuthService {
                 {
                    data:{
                     Username: user.Username,
-                    firstname: user.firstname,
-                    lasttname: user.lastname,
                     password : createHash("sha256").update(user.Password).digest("hex"),
                     accounttype:user.accountType
                    }

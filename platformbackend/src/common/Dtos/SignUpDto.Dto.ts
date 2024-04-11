@@ -9,16 +9,6 @@ export class AuthDto
     @MaxLength(10)
     Username: string
 
-    @IsAlpha()
-    @MinLength(4)
-    @MaxLength(10)
-    firstname: string
-    
-    @IsAlpha()
-    @MinLength(4)
-    @MaxLength(10)
-    lastname: string
-
     @IsEnum(accounttype)
     accountType: accounttype
 

@@ -32,7 +32,7 @@ export class OfferService {
             return await this.prisma.offer.findMany(
                 {
                     where:{
-                        Company :{
+                        title :{
                             contains:job,
                         }
                     },

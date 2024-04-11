@@ -5,14 +5,17 @@ import Recruter from "./components/Recruter"
 import Apply from "./components/Apply"
 import Auth from "./components/Auth"
 import { USER, USERContext } from "./Context/Authcontext"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   const [user, setUser] = useState<USER | null>(null);
   return (
-      <div className="min-h-screen bg-gray-900">
+      <div className="min-h-screen bg-blue-300">
         <USERContext.Provider value={user}>
-          <Navbar setUser={setUser}/>/>
+          <Navbar setUser={setUser}/>
           <Routes>
             <Route path="/" element={<Jobs />} />
             <Route path="/authentication" element={<Auth setUser={setUser}/>} />
@@ -22,6 +25,7 @@ function App() {
 
           </Routes>
         </USERContext.Provider>
+        <ToastContainer/>
       </div>
   )
 }

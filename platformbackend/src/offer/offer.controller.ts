@@ -3,12 +3,13 @@ import { OfferService } from './offer.service';
 import {  Recruter } from 'src/common/decorators/role.decorator';
 import { GetCurrentUser } from 'src/common/decorators/Auth.decorators';
 import { OfferDto } from 'src/common/Dtos/Offer.dto';
+import { log } from 'console';
 
 @Controller('offer')
 export class OfferController {
   constructor(private readonly offerService: OfferService) {}
   
-  @Post("create")
+  @Post("")
   @Recruter()  
   async createnewoffer( @GetCurrentUser('id') recruterid:number, offer :OfferDto)
   {
@@ -19,9 +20,10 @@ export class OfferController {
   @Recruter()  
   async deleteoffer(@GetCurrentUser('id') recruterid:number, @Param("id") offerid:number)
   {
-    if (Number.isNaN(offerid))
-        throw new HttpException("hoho", HttpStatus.BAD_REQUEST);
-      return await this.offerService.Deleteoffer(recruterid, offerid)
+    console.log(offerid)
+    if (Number.isNaN(offerid) || offerid < 0)
+      throw new HttpException("Bad Request", HttpStatus.BAD_REQUEST);
+    return await this.offerService.Deleteoffer(recruterid, offerid)
   }
 
   @Get()

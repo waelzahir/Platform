@@ -1,10 +1,8 @@
 import { Body, Controller, Get, HttpException, Post, Req, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { AuthDto, Authin } from './SignUpDto.Dto';
-import { Prisma } from "@prisma/client";
+import { AuthDto, Authin } from '../common/Dtos/SignUpDto.Dto';
 import { Response } from 'express';
-import { AuthGuard } from 'src/common/guards/auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -49,9 +47,5 @@ export class AuthController {
     response.cookie("AccesToken", "", { expires: new Date(Date.now()) });
     response.cookie("UserData", "", { expires: new Date(Date.now()) });
     response.end()
-  }
-  @Get()
-  async test() {
-    return "hi";
   }
 }

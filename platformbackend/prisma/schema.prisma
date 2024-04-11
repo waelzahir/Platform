@@ -12,6 +12,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model User {
   id    Int     @id @default(autoincrement())
   Username String  @unique
@@ -19,6 +20,28 @@ model User {
   lasttname  String
   password    String
   accounttype accounttype 
+  offers     Offer[]
+  applications     Application[]
+}
+
+model Offer {
+  id Int  @id @default(autoincrement())
+  recruter Int 
+  title String
+  Company String
+  recruter_id User @relation(fields: [recruter], references: [id], onDelete: Cascade)
+  applications     Application[]
+}
+
+model Application {
+  id Int  @id @default(autoincrement())
+  title String
+  Company String
+  applicant Int 
+  offer Int
+  offer_id Offer @relation(fields: [offer], references: [id], onDelete: Cascade)
+  applicant_id User @relation(fields: [applicant], references: [id], onDelete: Cascade)
+  @@unique([applicant, offer], name: "Application_constraint")
 }
 
 enum accounttype {

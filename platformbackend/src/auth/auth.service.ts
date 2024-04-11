@@ -1,7 +1,7 @@
 import { HttpCode, HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { TokenPayload } from './Payload';
-import { AuthDto, Authin } from './SignUpDto.Dto';
+import { TokenPayload } from '../common/types/Payload';
+import { AuthDto, Authin } from '../common/Dtos/SignUpDto.Dto';
 import { createHash } from "crypto";
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User, Prisma} from '@prisma/client';
@@ -16,6 +16,7 @@ export class AuthService {
     )  {}
 
     async   signupuser (user: AuthDto) {
+        let id;
         try {
             const User : User = await this.prisma.user.create(
                 {
@@ -28,7 +29,7 @@ export class AuthService {
                    }
                 }
             ) 
-
+            id = User.id
         }
         catch (error) {
           if (error instanceof Prisma.PrismaClientKnownRequestError)
@@ -36,6 +37,7 @@ export class AuthService {
           throw new HttpException("Bad Request", HttpStatus.BAD_REQUEST)
         }
         const Payload : TokenPayload = {
+            id : id,
             User: user.Username,
             Role: user.accountType
         }
@@ -56,6 +58,7 @@ export class AuthService {
             if (!User || User.password != createHash("sha256").update(user.Password).digest("hex"))
                 throw new UnauthorizedException()    
         const Payload : TokenPayload = {
+            id: User.id,
             User: User.Username,
             Role: User.accounttype
         }

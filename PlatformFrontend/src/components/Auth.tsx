@@ -10,7 +10,8 @@ const Auth = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<USER | null
         const [type, settype] = useState(false)
         const navigate = useNavigate();
         if (user)
-            navigate("/")
+            setTimeout(() => navigate("/"), 0)
+           
         return (
             <div className="w-full h-full flex flex-col  justify-center items-center">
                {

@@ -6,12 +6,16 @@ import Apply from "./components/Apply"
 import Auth from "./components/Auth"
 import { USER, USERContext } from "./Context/Authcontext"
 import { useEffect, useState } from "react"
-import { ToastContainer } from "react-toastify"
+import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
+import { getUserdata } from "./data/getUserdata"
 
 
 function App() {
   const [user, setUser] = useState<USER | null>(null);
+  useEffect(() => {
+    setUser(getUserdata())
+  },[])
   return (
       <div className="min-h-screen bg-blue-300">
         <USERContext.Provider value={user}>
@@ -22,7 +26,6 @@ function App() {
             <Route path="/application" element={<Apply />} />
             <Route path="/dashboard" element={<Recruter />} />
             <Route path="/*" element={<> error </> } />
-
           </Routes>
         </USERContext.Provider>
         <ToastContainer/>

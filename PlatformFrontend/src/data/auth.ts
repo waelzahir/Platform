@@ -2,6 +2,9 @@ import { toast } from "react-toastify"
 import { USER } from "../Context/Authcontext"
 import BackEndUrl from "../coreutils/backendurl"
 import { signinType, signupType } from "./Auth.types"
+import Cookies from "js-cookie";
+import { getUserdata } from "./getUserdata";
+
 
 export const loginaction = async (creds :signinType, setuser:any) => {
     try 
@@ -16,7 +19,11 @@ export const loginaction = async (creds :signinType, setuser:any) => {
             body: JSON.stringify(creds)
         })
         if (res.ok)
-            toast("logged in success")
+            {
+                toast("logged in success")
+                setuser(getUserdata())
+
+            }
         else
         {
             const data = await res.json()
@@ -42,7 +49,10 @@ export const signupaction = async (creds :signupType,  setuser:any) => {
             body: JSON.stringify(creds)
         })
         if (res.ok)
-            toast("logged in success")
+            {
+                toast("joining success")
+                setuser(getUserdata())
+            }
         else
         {
             const data = await res.json()
@@ -58,7 +68,7 @@ export const signupaction = async (creds :signupType,  setuser:any) => {
 export const logout = async (setUser:React.Dispatch<React.SetStateAction<USER | null>>) => {
     const res  = await fetch(`${BackEndUrl}/auth/Logout`, 
         {
-            method: "POST",
+            method: "Get",
             credentials: "include",
         }
     )

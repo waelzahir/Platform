@@ -6,7 +6,7 @@ import { logout } from "../data/auth"
 const Navbar = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<USER | null>>}) =>
 {
     const user = useContext(USERContext)
-   
+    console.log(user, "context")
     return (
         <div className="h-16 w-full flex fles-row items-center justify-end">
             {

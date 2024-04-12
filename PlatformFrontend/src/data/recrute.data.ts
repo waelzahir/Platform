@@ -5,7 +5,7 @@ export const getrecruteroffers = async (setOffers:any , offset = 0) =>
 {
     const query = `?offset=${offset}`
     try {
-        const res  = await fetch(`${BackEndUrl}/users/applications${query}`, {method: "GET", credentials:"include"})
+        const res  = await fetch(`${BackEndUrl}/offer/applications${query}`, {method: "GET", credentials:"include"})
         if (res.ok)
             setOffers(await res.json())
         else

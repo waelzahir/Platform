@@ -1,10 +1,11 @@
-import { Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { OfferService } from './offer.service';
-import {  Recruter } from 'src/common/decorators/role.decorator';
+import {  Applicant, Recruter } from 'src/common/decorators/role.decorator';
 import { GetCurrentUser } from 'src/common/decorators/Auth.decorators';
 import { OfferDto } from 'src/common/Dtos/Offer.dto';
 import { log } from 'console';
 import { Public } from 'src/common/decorators/public.decorator';
+import { applyDto } from 'src/common/Dtos/apply.Dto';
 
 @Controller('offer')
 export class OfferController {
@@ -12,8 +13,9 @@ export class OfferController {
   
   @Post("")
   @Recruter()  
-  async createnewoffer( @GetCurrentUser('id') recruterid:number, offer :OfferDto)
+  async createnewoffer( @GetCurrentUser('id') recruterid:number, @Body() offer :OfferDto)
   {
+    console.log(offer)
     return await this.offerService.createoffer(recruterid , offer);
   }
   
@@ -37,5 +39,20 @@ export class OfferController {
     if (type === "Company")
       return await this.offerService.getOffersbyCompany(search, index);
     return await this.offerService.getoffers(index);
+  }
+
+  @Post("Apply")
+  @Applicant()
+  async ApplyToOffer(@GetCurrentUser('id') aplicant:number, @Body() offer: applyDto)
+  {
+    return await this.offerService.ApplyToOffer(aplicant, offer);
+  }
+
+  @Get("applications")
+  @Recruter()
+  async GetMyOffers(@GetCurrentUser('id') recruter:number, @Query("offset") offset:number)
+  {
+    console.log(recruter, "recruterid is")
+    return await this.offerService.getMyOffers(recruter, offset);
   }
 }

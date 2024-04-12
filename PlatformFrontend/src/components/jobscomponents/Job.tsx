@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { JobType } from "../../data/Job.type"
 
 const Job = ({jobs, index}: {jobs:JobType[] | null, index:number}) =>
@@ -16,6 +17,11 @@ const Job = ({jobs, index}: {jobs:JobType[] | null, index:number}) =>
 
             jobs[index].Company
             }
+            <Link to={`/application/${jobs[index].id}`}>
+                <div className="border-2">
+                    Apply
+                </div>
+            </Link>
         </div>
     )
 }

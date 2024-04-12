@@ -18,6 +18,7 @@ import { Reflector } from '@nestjs/core';
       const isPublic = this.reflector.getAllAndOverride("isPublic", [context.getHandler(), context.getClass()]);
 		  if (isPublic)
           return true;
+      console.log("authguard")
       const token = this.extractTokenFromHeader(request);
       if (!token) {
         throw new UnauthorizedException();

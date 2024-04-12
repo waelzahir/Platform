@@ -19,6 +19,7 @@ model User {
   password    String
   accounttype accounttype 
   offers     Offer[]
+  applicatioms Application[]
 }
 
 model Offer {
@@ -35,8 +36,11 @@ model Application {
   name String
   email String
   phonenumber String
+  apllicant Int
+  apllicant_id User @relation(fields: [apllicant], references: [id], onDelete: Cascade)
   offer Int
   offer_id Offer @relation(fields: [offer], references: [id], onDelete: Cascade)
+  @@unique([offer, apllicant])
 }
 
 enum accounttype {

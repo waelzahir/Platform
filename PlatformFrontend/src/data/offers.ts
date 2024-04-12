@@ -1,23 +1,40 @@
 import BackEndUrl from "../coreutils/backendurl"
 import { toast } from "react-toastify"
-import { JobType } from "./Job.type"
+import { Application, JobType } from "./Job.type"
+import { USER } from "../Context/Authcontext"
 
 
+export type offerType= {
+    title: string
+    Company: string
+    recruter_id?:  USER
+    applications? : Application []
+}
 
-export const Postoffer = async (offer :any) => {
+export const Postoffer = async (offer :offerType, settitle:any, setcom:any) => {
     
     try {
         const res  = await fetch(`${BackEndUrl}/offer`, 
         {
             method: "POST",
             credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify(offer)
         }
         )
         if (res.ok)
-            toast("offer created succesfully")
+            {
+                toast("offer created succesfully")
+                settitle("")
+                setcom("")
+            }
         else
-        toast.error(res.statusText)
+        {
+            const data = await res.json()
+            toast.error(Array.isArray(data.message) ? data.message[0] :data.message )
+        }
     }
     catch {
         toast.error("network error")
@@ -55,3 +72,31 @@ export const Getoffer = async (setjobs: React.Dispatch<React.SetStateAction< Job
 }
 
 
+export const apllytojob = async (creds :Application) => {
+    try 
+    {
+        const res  = await fetch(`${BackEndUrl}/offer/Apply`, 
+        {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(creds)
+        })
+        if (res.ok)
+            {
+                toast("apllication in success")
+
+            }
+        else
+        {
+            const data = await res.json()
+            toast.error(Array.isArray(data.message) ? data.message[0] :data.message )
+        }
+    }
+    catch 
+    {
+        toast.error("network error")
+    }
+}

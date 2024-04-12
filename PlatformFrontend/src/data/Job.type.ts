@@ -3,3 +3,10 @@ export type JobType = {
     Company:string
     title:string
 }
+
+export type Application = {
+    id? : number
+    name: string
+    email: string
+    phonenumber:string
+}

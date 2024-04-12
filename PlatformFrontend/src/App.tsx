@@ -23,7 +23,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Jobs />} />
             <Route path="/authentication" element={<Auth setUser={setUser}/>} />
-            <Route path="/application" element={<Apply />} />
+            <Route path="/application/:id" element={<Apply />} />
+            <Route path="/application/" element={<Apply />} />
             <Route path="/dashboard" element={<Recruter />} />
             <Route path="/*" element={<> error </> } />
           </Routes>

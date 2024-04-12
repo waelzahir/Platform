@@ -1,8 +1,18 @@
 import { MinLength } from "class-validator"
 
 export class OfferDto {
-    @MinLength(3)
-    title: string
-    @MinLength(3)
-    Company: string
+    id: number;
+    Employer: string;
+    Job_title: string;
+    Company_location: string;
+    Wages: string;
+    Experience: string;
+    description: string;
+    Job_Location: string;
+    Company_description: string;
+    role_Responsibilities: string;
+    role_Requirements: string;
+    Start_date: string;
+    Posting_date: string;
+    recruter: number;
 }

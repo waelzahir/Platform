@@ -23,10 +23,20 @@ model User {
 }
 
 model Offer {
-  id Int  @id @default(autoincrement())
-  recruter Int 
-  title String
-  Company String
+  id Int  @id @default(autoincrement())  
+  Employer String?
+  Job_title String?
+  Company_location String?
+  Wages String?
+  Experience String?
+  description String?
+  Job_Location String?
+  Company_description String?
+  role_Responsibilities String?
+  role_Requirements String?
+  Start_date String?
+  Posting_date String?
+  recruter Int
   recruter_id User @relation(fields: [recruter], references: [id], onDelete: Cascade)
   applications     Application[]
 }

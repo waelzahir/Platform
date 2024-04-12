@@ -1,17 +1,13 @@
 import BackEndUrl from "../coreutils/backendurl"
 import { toast } from "react-toastify"
-import { Application, JobType } from "./Job.type"
-import { USER } from "../Context/Authcontext"
+import { Offer } from "../types/offer.type"
+import { Application } from "../types/application.type"
 
 
-export type offerType= {
-    title: string
-    Company: string
-    recruter_id?:  USER
-    applications? : Application []
-}
 
-export const Postoffer = async (offer :offerType, settitle:any, setcom:any) => {
+
+
+export const Postoffer = async (offer :Offer, settitle:any, setcom:any) => {
     
     try {
         const res  = await fetch(`${BackEndUrl}/offer`, 
@@ -56,7 +52,7 @@ export const deleteoffer = async (offer_id:number) => {
         toast.error("network error")
     }
 }
-export const Getoffer = async (setjobs: React.Dispatch<React.SetStateAction< JobType [] | null>>, offset= 0, type = "" , search = "" ) =>
+export const Getoffer = async (setjobs: React.Dispatch<React.SetStateAction< Offer [] | null>>, offset= 0, type = "" , search = "" ) =>
 {
     const query = `?offset=${offset}&type=${type}&search=${search}`
     try {

@@ -1,6 +1,6 @@
-import { JobType } from "../../data/Job.type"
+import { Offer } from "../../types/offer.type"
 
-const Joblist = ({jobs , setindex}:{jobs : JobType [] | null, setindex:any} ) => 
+const Joblist = ({jobs , setindex}:{jobs : Offer [] | null, setindex:any} ) => 
 {
     return (
         <div className="min-h-6 w-96   bg-gray-400 rounded">
@@ -15,21 +15,21 @@ const Joblist = ({jobs , setindex}:{jobs : JobType [] | null, setindex:any} ) =>
                 jobs.length === 0 ?
                 <NoListing/>
                 :
-                jobs.map((job:JobType, index:number) => <Listing key={job.id} job={job} clicked={() => setindex(index)} />)
+                jobs.map((job:Offer, index:number) => <Listing key={job.id} job={job} clicked={() => setindex(index)} />)
                 }
             </div>
         </div>
     )
 }
-const Listing = ({job, clicked}:{job : JobType, clicked:any}) =>
+const Listing = ({job, clicked}:{job : Offer, clicked:any}) =>
 { 
     return (
         <div onClick={clicked} className="w-full h-20 bg-green-200 flex flex-col justify-center items-center cursor-pointer   ">
             <h1 className="w-[90%]">
-               {job.title}
+               {job.Job_title}
             </h1>
             <h1 className="w-[90%]">
-                {job.Company}
+                {job.Employer}
             </h1>
         </div>
     )

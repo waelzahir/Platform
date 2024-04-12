@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Offer, Prisma } from '@prisma/client';
 import { OfferDto } from 'src/common/Dtos/Offer.dto';
 import { applyDto } from 'src/common/Dtos/apply.Dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -10,15 +10,11 @@ export class OfferService {
         private readonly prisma :PrismaService
     ){}
 
-    async createoffer(recruterid : number, offer :OfferDto)
+    async createoffer(recruterid : number, offer :Offer)
     {
         return this.prisma.offer.create(
             {
-                data:{
-                    title:offer.title,
-                    Company:offer.Company,
-                    recruter:recruterid
-                }
+                data:offer
             }
         )
     }
@@ -43,7 +39,7 @@ export class OfferService {
             return await this.prisma.offer.findMany(
                 {
                     where:{
-                        title :{
+                        Job_title :{
                             contains:job,
                         }
                     },
@@ -64,7 +60,7 @@ export class OfferService {
             return await this.prisma.offer.findMany(
                 {
                     where:{
-                        Company :{
+                        Employer :{
                             contains:com,
                         }
                     },
@@ -104,9 +100,8 @@ export class OfferService {
                     recruter: recruter
                 },
                 select:{
-                    id:true,
-                    title:true,
-                    Company:true,
+                    Employer:true,
+                    Job_title:true,
                     applications: true
                 },
                 take: 30,

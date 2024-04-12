@@ -1,9 +1,17 @@
 import { toast } from "react-toastify"
-import { USER } from "../Context/Authcontext"
 import BackEndUrl from "../coreutils/backendurl"
-import { signinType, signupType } from "./Auth.types"
 import { getUserdata } from "./getUserdata";
 
+export type signupType = {
+    Username : string
+    accountType:string
+    Password:string
+}
+
+export type signinType = {
+    Username : string
+    Password:string
+}
 
 export const loginaction = async (creds :signinType, setuser:any) => {
     try 
@@ -64,7 +72,7 @@ export const signupaction = async (creds :signupType,  setuser:any) => {
     }
 }
 
-export const logout = async (setUser:React.Dispatch<React.SetStateAction<USER | null>>) => {
+export const logout = async (setUser:any) => {
     const res  = await fetch(`${BackEndUrl}/auth/Logout`, 
         {
             method: "Get",

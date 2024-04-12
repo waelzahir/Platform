@@ -1,11 +1,5 @@
 import { createContext } from 'react';
+import {User} from "../types/user.type"
 
-export interface USER
-{
-	id:number
-    User: string,
-    Role: string
-}
-
-export const USERContext = createContext<USER | null>(null)
+export const USERContext = createContext<User | null>(null)
 

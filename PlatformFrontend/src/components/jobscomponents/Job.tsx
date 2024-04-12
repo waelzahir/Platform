@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import { JobType } from "../../data/Job.type"
+import { Offer } from "../../types/offer.type"
 
-const Job = ({jobs, index}: {jobs:JobType[] | null, index:number}) =>
+const Job = ({jobs, index}: {jobs:Offer[] | null, index:number}) =>
 {
     if (!jobs)
             return <Error message="no listing"/>
@@ -10,12 +10,12 @@ const Job = ({jobs, index}: {jobs:JobType[] | null, index:number}) =>
     return (
         <div className=" min-h-9 w-full">
             {
-                jobs[index].title 
+                jobs[index].Job_title 
                 
             }
             {
 
-            jobs[index].Company
+            jobs[index].Employer
             }
             <Link to={`/application/${jobs[index].id}`}>
                 <div className="border-2">

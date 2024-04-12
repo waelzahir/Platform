@@ -3,12 +3,12 @@ import { JobSearch } from "./jobscomponents/Search"
 import Joblist from "./jobscomponents/Joblist"
 import Job from "./jobscomponents/Job"
 import { useJobs } from "../data/JobsHook"
-import { JobType } from "../data/Job.type"
+import { Offer } from "../types/offer.type"
 
 const Jobs = () =>
     {
         const [index, setindex] = useState(0)
-        const [jobs, setjobs] = useState< JobType[] | null>(null)
+        const [jobs, setjobs] = useState< Offer [] | null>(null)
         console.log(index)
         useJobs(setjobs)
         return (

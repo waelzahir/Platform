@@ -10,6 +10,7 @@ import {
   import { Request } from 'express';
 import { TokenPayload } from '../types/Payload';
 import { Reflector } from '@nestjs/core';
+import { accounttype } from '@prisma/client';
   
   @Injectable()
   export class RoleGuard implements CanActivate {
@@ -20,8 +21,8 @@ import { Reflector } from '@nestjs/core';
       const role = this.reflector.getAllAndOverride("ROLE", [context.getHandler(), context.getClass()]);
 	  if (typeof role === 'undefined')
         return true;
-      
-      if (request['user'].Role !== role)
+      console.log(request['user'].accounttype, role)
+      if (request['user'].accounttype !== role)
             throw new HttpException(`action is ${role} only`, HttpStatus.BAD_REQUEST)
       return true
     }

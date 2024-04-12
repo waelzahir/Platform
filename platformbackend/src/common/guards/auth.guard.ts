@@ -18,11 +18,13 @@ import { Reflector } from '@nestjs/core';
       const isPublic = this.reflector.getAllAndOverride("isPublic", [context.getHandler(), context.getClass()]);
 		  if (isPublic)
           return true;
-      console.log("authguard")
+      console.log("authguard 1")
       const token = this.extractTokenFromHeader(request);
       if (!token) {
         throw new UnauthorizedException();
       }
+      console.log("authguard 2")
+
       try {
         const payload:TokenPayload = await this.jwtService.verifyAsync(
           token,
@@ -31,9 +33,15 @@ import { Reflector } from '@nestjs/core';
           }
         );
         request['user'] = payload;
+        console.log("authguard 3")
+
       } catch {
+        console.log("authguard 4")
+
         throw new UnauthorizedException();
       }
+      console.log("authguard success")
+
       return true
     }
   

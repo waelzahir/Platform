@@ -4,15 +4,16 @@ import Jobs from "./components/Jobs"
 import Recruter from "./components/Recruter"
 import Apply from "./components/Apply"
 import Auth from "./components/Auth"
-import { USER, USERContext } from "./Context/Authcontext"
+import {  USERContext } from "./Context/Authcontext"
 import { useEffect, useState } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import { getUserdata } from "./data/getUserdata"
+import { User } from "./types/user.type"
 
 
 function App() {
-  const [user, setUser] = useState<USER | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     setUser(getUserdata())
   },[])

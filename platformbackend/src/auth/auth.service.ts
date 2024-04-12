@@ -36,8 +36,8 @@ export class AuthService {
         }
         const Payload : TokenPayload = {
             id : id,
-            User: user.Username,
-            Role: user.accountType
+            Username: user.Username,
+            accounttype: user.accountType
         }
         return {
             user :Payload,
@@ -57,8 +57,8 @@ export class AuthService {
                 throw new UnauthorizedException()    
         const Payload : TokenPayload = {
             id: User.id,
-            User: User.Username,
-            Role: User.accounttype
+            Username: User.Username,
+            accounttype: User.accounttype
         }
         return {
             user :Payload,

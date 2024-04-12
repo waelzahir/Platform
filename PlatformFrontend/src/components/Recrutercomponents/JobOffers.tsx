@@ -1,4 +1,3 @@
-import { offerType } from "../../data/offers";
 
 export const JobOffers = ({offers, index, setindex}: {offers: offerType[] | null, index : number, setindex:any}) =>
 {

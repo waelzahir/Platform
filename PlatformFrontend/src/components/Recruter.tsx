@@ -3,14 +3,14 @@ import { USERContext } from "../Context/Authcontext";
 import { useNavigate } from "react-router-dom";
 import { useOffers } from "../data/JobsHook";
 import { CreateOffer } from "./Recrutercomponents/CreateOffer";
-import { offerType } from "../data/offers";
 import { JobOffers } from "./Recrutercomponents/JobOffers";
+import { Offer } from "../types/offer.type";
 
 const Recruter = () =>
     {
         const user = useContext(USERContext)
         const [index, setindex] = useState(0)
-        const [offers, setoffers] = useState< offerType[] | null>(null)
+        const [offers, setoffers] = useState< Offer[] | null>(null)
 
         const navigate = useNavigate();
         useEffect(() =>{

@@ -15,7 +15,7 @@ const Recruter = () =>
         const navigate = useNavigate();
         useEffect(() =>{
             if (!user)
-                setTimeout(() => navigate("/authentication"), 0)
+                navigate("/authentication")
         },[])
         useOffers(index, setoffers)
         return (

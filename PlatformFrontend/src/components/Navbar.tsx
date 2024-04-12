@@ -42,8 +42,8 @@ const Recruterbuttons = ({user, setUser} : {user :User, setUser : any}) =>
         <div className="h-16 w-full flex fles-row items-center justify-between">
             <div  className=" h-10 ml-6 rounded bg-blue-600 flex justify-center items-center font-bold">
                 <h1 className="p-2 max-w-[300px] truncate">
-                    <Link to={"/dashboard"}>
-                            Dashboard
+                    <Link to={"/Recruter"}>
+                        Recruter Dashboard
                     </Link>
                 </h1>   
             </div>

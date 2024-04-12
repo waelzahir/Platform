@@ -12,9 +12,16 @@ export class OfferService {
 
     async createoffer(recruterid : number, offer :Offer)
     {
-        return this.prisma.offer.create(
+         return this.prisma.user.update(
             {
-                data:offer
+                where:{
+                    id:recruterid
+                },
+                data:{
+                    offers:{ 
+                        create:offer
+                    }
+                }
             }
         )
     }
@@ -124,7 +131,7 @@ export class OfferService {
 
                     applications: {
                         create:{
-                            apllicant:userid,
+                            applicant:userid,
                             name:offer.name,
                             email:offer.email,
                             phonenumber:offer.phonenumber

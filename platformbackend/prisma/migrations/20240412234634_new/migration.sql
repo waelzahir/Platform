@@ -37,7 +37,7 @@ CREATE TABLE "Application" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phonenumber" TEXT NOT NULL,
-    "apllicant" INTEGER NOT NULL,
+    "applicant" INTEGER NOT NULL,
     "offer" INTEGER NOT NULL,
 
     CONSTRAINT "Application_pkey" PRIMARY KEY ("id")
@@ -47,13 +47,13 @@ CREATE TABLE "Application" (
 CREATE UNIQUE INDEX "User_Username_key" ON "User"("Username");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Application_offer_apllicant_key" ON "Application"("offer", "apllicant");
+CREATE UNIQUE INDEX "Application_offer_applicant_key" ON "Application"("offer", "applicant");
 
 -- AddForeignKey
 ALTER TABLE "Offer" ADD CONSTRAINT "Offer_recruter_fkey" FOREIGN KEY ("recruter") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Application" ADD CONSTRAINT "Application_apllicant_fkey" FOREIGN KEY ("apllicant") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Application" ADD CONSTRAINT "Application_applicant_fkey" FOREIGN KEY ("applicant") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Application" ADD CONSTRAINT "Application_offer_fkey" FOREIGN KEY ("offer") REFERENCES "Offer"("id") ON DELETE CASCADE ON UPDATE CASCADE;

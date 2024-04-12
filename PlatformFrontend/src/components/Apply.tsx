@@ -13,7 +13,7 @@ const Apply = () =>
         const params = useParams()
         useEffect(() =>{
             if (!user )
-                    navigate("/authentication")
+                navigate("/authentication")
         } ,[])
         if (params.id === undefined)
                 return null;
@@ -23,7 +23,7 @@ const Apply = () =>
                     id: +params.id,
                     email:email,
                     name:name,
-                    phonenumber:phone
+                    phonenumber:phone,
                 })
             }
         return (

@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react"
-import { USER, USERContext } from "../Context/Authcontext"
 import { useNavigate } from "react-router-dom"
 import { loginaction, signupaction } from "../data/auth"
+import { User } from "../types/user.type"
+import { USERContext } from "../Context/Authcontext"
 
 
-const Auth = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<USER | null>>}) =>
+const Auth = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<User | null>>}) =>
     {
         const user = useContext(USERContext)
         const [type, settype] = useState(false)
@@ -12,8 +13,7 @@ const Auth = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<USER | null
         useEffect(() =>{
             if (user)
                 setTimeout(() => navigate("/"), 0)
-
-        },[])
+        },[user])
            
         return (
             <div className="w-full h-full flex flex-col  justify-center items-center">
@@ -37,7 +37,7 @@ const Auth = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<USER | null
         )
     }
       
-const Signin = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<USER | null>>}) => 
+const Signin = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<User | null>>}) => 
     {
         const [username, setusername] = useState("")
         const [password, setpassword] = useState("")
@@ -74,19 +74,20 @@ const Signin = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<USER | nu
         )
     }
 
-    const Signup = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<USER | null>>}) => 
+    const Signup = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<User | null>>}) => 
         {
             const [type, settype] = useState("applicant")
             const [username, setusername] = useState("")
             const [password, setpassword] = useState("")
-            console.log(type)
+            const navigate = useNavigate();
+
             const takeaction = () =>
                 {
                         signupaction({
                             Username: username,
                             accountType:type,
                             Password:password
-                        }, setUser)
+                        })
                 }
             return (
                 <div className="flex-1 flex flex-col w-[50%] justify-center gap-2 ">

@@ -7,5 +7,5 @@ export type User = {
     Username: string
     accounttype: accounttype
     offers :Offer []
-    applicatioms: Application[]
+    applications: Application[]
 }

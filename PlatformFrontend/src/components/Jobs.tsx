@@ -8,8 +8,7 @@ import { Offer } from "../types/offer.type"
 const Jobs = () =>
     {
         const [index, setindex] = useState(0)
-        const [jobs, setjobs] = useState< Offer [] | null>(null)
-        console.log(index)
+        const [jobs, setjobs] = useState< Offer[] | null>(null)
         useJobs(setjobs)
         return (
             <div className="  w-full flex flex-col  items-center">

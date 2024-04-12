@@ -25,8 +25,7 @@ function App() {
             <Route path="/" element={<Jobs />} />
             <Route path="/authentication" element={<Auth setUser={setUser}/>} />
             <Route path="/application/:id" element={<Apply />} />
-            <Route path="/application/" element={<Apply />} />
-            <Route path="/dashboard" element={<Recruter />} />
+            <Route path="/Recruter" element={<Recruter />} />
             <Route path="/*" element={<> error </> } />
           </Routes>
         </USERContext.Provider>

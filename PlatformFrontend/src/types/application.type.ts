@@ -8,5 +8,5 @@ export type Application =
     email :string
     phonenumber :string
     offer_id : Offer
-    apllicant_id : User 
+    applicant_id : User 
 }

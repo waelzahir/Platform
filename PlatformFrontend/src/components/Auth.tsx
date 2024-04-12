@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { USER, USERContext } from "../Context/Authcontext"
 import { useNavigate } from "react-router-dom"
 import { loginaction, signupaction } from "../data/auth"
@@ -9,8 +9,11 @@ const Auth = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<USER | null
         const user = useContext(USERContext)
         const [type, settype] = useState(false)
         const navigate = useNavigate();
-        if (user)
-            setTimeout(() => navigate("/"), 0)
+        useEffect(() =>{
+            if (user)
+                setTimeout(() => navigate("/"), 0)
+
+        },[])
            
         return (
             <div className="w-full h-full flex flex-col  justify-center items-center">

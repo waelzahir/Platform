@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthDto, Authin } from '../common/Dtos/SignUpDto.Dto';
 import { Request, Response } from 'express';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -12,6 +13,7 @@ export class AuthController {
   
 
   @Post("signup")
+  @Public()
   async signup( @Req() req: Request, @Res() response: Response,   @Body() User: AuthDto){
     console.log(User, req)
     const {user, JWT} = await this.authService.signupuser(User);
@@ -21,11 +23,9 @@ export class AuthController {
       secure: false,
       maxAge:  15 * 60 * 1000,
     });
-    response.cookie("test", "test", {
-      httpOnly: true,
-    });
     response.cookie("UserData", JSON.stringify(user), {
       httpOnly: false,
+      maxAge:  15 * 60 * 1000,
     });
     response.end()
   }
@@ -33,6 +33,7 @@ export class AuthController {
 
 
   @Post("signin")
+  @Public()
   async signin(@Res() response : Response, @Body() User: Authin) {
     const {user, JWT} = await this.authService.signinuser(User);
     response.cookie("AccesToken", JWT, {
@@ -42,6 +43,7 @@ export class AuthController {
     });
     response.cookie("UserData", JSON.stringify(user), {
 			httpOnly: false,
+      maxAge:  15 * 60 * 1000,
 		});
     response.end()
   }

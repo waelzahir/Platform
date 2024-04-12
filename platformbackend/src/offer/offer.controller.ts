@@ -4,6 +4,7 @@ import {  Recruter } from 'src/common/decorators/role.decorator';
 import { GetCurrentUser } from 'src/common/decorators/Auth.decorators';
 import { OfferDto } from 'src/common/Dtos/Offer.dto';
 import { log } from 'console';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('offer')
 export class OfferController {
@@ -27,6 +28,7 @@ export class OfferController {
   }
 
   @Get()
+  @Public()
   async getOffers(@Query("offset") offset:number, @Query("type") type:string, @Query("search") search:string )
   {
     const index = !Number.isNaN(offset) && offset > 0  ? offset : 0;

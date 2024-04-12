@@ -2,7 +2,6 @@ import { toast } from "react-toastify"
 import { USER } from "../Context/Authcontext"
 import BackEndUrl from "../coreutils/backendurl"
 import { signinType, signupType } from "./Auth.types"
-import Cookies from "js-cookie";
 import { getUserdata } from "./getUserdata";
 
 

@@ -20,6 +20,7 @@ const Apply = () =>
         const takeaction  = () =>
             {
                 apllytojob({
+                    
                     id: +params.id,
                     email:email,
                     name:name,

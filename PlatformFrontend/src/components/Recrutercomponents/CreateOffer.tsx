@@ -35,7 +35,6 @@ export const CreateOffer =() =>
     const [title, settitle] = useState("")
     const takeaction = () =>
     {
-
         Postoffer(offer, setoffer)
     }
     return (

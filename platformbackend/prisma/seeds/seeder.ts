@@ -14,26 +14,26 @@ fs.createReadStream("jobsdatabase.csv")
   .pipe(csv())
   .on('data', (data) => results.push(data))
   .on('end', async () => {
-      await prisma.user.update(
+      results.reverse()
+      for(let i = 0 ; i < results.length; i++)
         {
-          where:{
-            Username: "rootuser"
-          },
-          data:{
-            offers:{
-              createMany:{
-                data:results,
-              }
+          results[i].recruter = 1
+          const data = await prisma.offer.create(
+            {
+              data:results[i]
             }
-          }
+          )
+          console.log("Offer seeded", i)
+          console.log(data)
+
         }
-      )
 	  
   });
 
 
 
   type Offer = {
+    recruter:number
     Employer :  string
     Job_title : string
     Company_location :  string

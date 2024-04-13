@@ -27,6 +27,7 @@ CREATE TABLE "Offer" (
     "Start_date" TEXT,
     "Posting_date" TEXT,
     "recruter" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Offer_pkey" PRIMARY KEY ("id")
 );

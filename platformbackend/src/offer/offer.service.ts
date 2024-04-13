@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Offer, Prisma } from '@prisma/client';
-import { OfferDto } from 'src/common/Dtos/Offer.dto';
 import { applyDto } from 'src/common/Dtos/apply.Dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -48,10 +47,14 @@ export class OfferService {
                     where:{
                         Job_title :{
                             contains:job,
+                            mode: 'insensitive',
                         }
                     },
-                    skip: 30 * offset,
-                    take: 30,
+                    skip: 10 * offset,
+                    take: 10,
+                    orderBy: {
+                        created_at: 'desc'
+                    }
                 }
             )
         } 
@@ -69,10 +72,14 @@ export class OfferService {
                     where:{
                         Employer :{
                             contains:com,
+                            mode: 'insensitive',
                         }
                     },
-                    skip: 30 * offset,
-                    take: 30,
+                    skip: 10 * offset,
+                    take: 10,
+                    orderBy: {
+                        created_at: 'desc'
+                    }
                 }
             )
         
@@ -89,8 +96,11 @@ export class OfferService {
         {
             return await this.prisma.offer.findMany(
                 {
-                    skip: 30 * offset,
-                    take: 30,
+                    skip: 10 * offset,
+                    take: 10,
+                    orderBy: {
+                        created_at: 'desc'
+                    }
                 }
             )
         } 
@@ -111,8 +121,11 @@ export class OfferService {
                     Job_title:true,
                     applications: true
                 },
-                take: 30,
-                skip:30 * offset
+                take: 10,
+                skip:10 * offset,
+                orderBy: {
+                    created_at: 'desc'
+                } 
             }
         )
     }

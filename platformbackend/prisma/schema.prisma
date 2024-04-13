@@ -37,6 +37,7 @@ model Offer {
   Start_date String?
   Posting_date String?
   recruter Int
+  created_at        DateTime        @default(now())
   recruter_id User @relation(fields: [recruter], references: [id], onDelete: Cascade)
   applications     Application[]
 }

@@ -79,7 +79,6 @@ const Signin = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<User | nu
             const [type, settype] = useState("applicant")
             const [username, setusername] = useState("")
             const [password, setpassword] = useState("")
-            const navigate = useNavigate();
 
             const takeaction = () =>
                 {
@@ -87,7 +86,7 @@ const Signin = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<User | nu
                             Username: username,
                             accountType:type,
                             Password:password
-                        })
+                        }, setUser)
                 }
             return (
                 <div className="flex-1 flex flex-col w-[50%] justify-center gap-2 ">

@@ -3,12 +3,9 @@ import { toast } from "react-toastify"
 import { Offer } from "../types/offer.type"
 import { Application } from "../types/application.type"
 
-
-
-
-
 export const Postoffer = async (offer :Offer, settitle:any, setcom:any) => {
     
+    console.log(offer)
     try {
         const res  = await fetch(`${BackEndUrl}/offer`, 
         {

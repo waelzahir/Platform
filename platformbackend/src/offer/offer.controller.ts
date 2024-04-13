@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, 
 import { OfferService } from './offer.service';
 import {  Applicant, Recruter } from 'src/common/decorators/role.decorator';
 import { GetCurrentUser } from 'src/common/decorators/Auth.decorators';
-import { OfferDto } from 'src/common/Dtos/Offer.dto';
 import { log } from 'console';
 import { Public } from 'src/common/decorators/public.decorator';
 import { applyDto } from 'src/common/Dtos/apply.Dto';
@@ -13,9 +12,9 @@ export class OfferController {
   
   @Post("")
   @Recruter()  
-  async createnewoffer( @GetCurrentUser('id') recruterid:number, @Body() offer :OfferDto)
+  async createnewoffer( @GetCurrentUser('id') recruterid:number, @Body() offer :any)
   {
-    console.log(offer)
+    console.log(offer, "created offer ")
     return await this.offerService.createoffer(recruterid , offer);
   }
   
@@ -33,6 +32,7 @@ export class OfferController {
   @Public()
   async getOffers(@Query("offset") offset:number, @Query("type") type:string, @Query("search") search:string )
   {
+    console.log(type, search, offset)
     const index = !Number.isNaN(offset) && offset > 0  ? offset : 0;
     if (type === "title")
         return await this.offerService.getOffersbytitle(search, index);
@@ -45,6 +45,7 @@ export class OfferController {
   @Applicant()
   async ApplyToOffer(@GetCurrentUser('id') aplicant:number, @Body() offer: applyDto)
   {
+    console.log(offer)
     return await this.offerService.ApplyToOffer(aplicant, offer);
   }
 

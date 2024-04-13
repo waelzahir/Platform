@@ -3,7 +3,6 @@ import BackEndUrl from "../coreutils/backendurl"
 
 export const getrecruteroffers = async (setOffers:any , offset = 0) =>
 {
-    console.log("fetching")
     const query = `?offset=${offset}`
     try {
         const res  = await fetch(`${BackEndUrl}/offer/applications${query}`, {method: "GET", credentials:"include"})
@@ -11,7 +10,6 @@ export const getrecruteroffers = async (setOffers:any , offset = 0) =>
             {
                 setOffers(await res.json())
                 toast("offers success")
-
             }
         else
             toast.error(res.statusText)

@@ -53,7 +53,8 @@ export class AuthService {
                   }
                 }
             ) 
-            if (!User || User.password != createHash("sha256").update(user.Password).digest("hex"))
+            console.log(User, createHash("sha256").update(user.Password).digest("hex"))
+            if (!User || User.password !== createHash("sha256").update(user.Password).digest("hex"))
                 throw new UnauthorizedException()    
         const Payload : TokenPayload = {
             id: User.id,

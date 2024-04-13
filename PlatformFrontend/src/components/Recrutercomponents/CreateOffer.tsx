@@ -7,7 +7,7 @@ export const CreateOffer =() =>
     const [title, settitle] = useState("")
     const takeaction = () =>
     {
-        Postoffer({Company:company, title:title}, setCompany, settitle)
+        Postoffer({Employer:company, Job_title:title}, setCompany, settitle)
     }
     return (
         <div className="flex gap-2">

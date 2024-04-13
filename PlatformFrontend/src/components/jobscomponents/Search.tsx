@@ -12,14 +12,14 @@ export const JobSearch = ({settypequery,setserchquery,setSearch, setofsset}:{set
     }
 
     return (
-        <div className="w-full flex  items-center justify-center   mt-5">
-            <div className="flex w-[90%]  flex-col gap-x-6 items-center rounded border-2 ">
-            <div className="flex flex-row  justify-evenly items-center mt-5 w-96">
+        <div className="w-full flex   items-center justify-center   mt-5">
+            <div className="flex w-[90%]  flex-row justify-evenly gap-x-6 items-center rounded border-2   ">
+            <div className="flex flex-row  justify-evenly items-center  w-96">
                     <h1 className="">Search Query:</h1>
                     <input className="rounded h-10 text-center" onChange={(e) => setsearch(e.target.value)} value={serch} placeholder="  job / company"></input>
 
                 </div>
-                <div className="flex flex-row w-96 justify-evenly items-center mt-5">
+                <div className="flex flex-row w-96 justify-evenly items-center">
                     <TypeButton type={type} typesetter={settype} typetext="title"/>
                     <TypeButton type={type} typesetter={settype} typetext="Company"/>
                 </div>

@@ -2,10 +2,11 @@ import BackEndUrl from "../coreutils/backendurl"
 import { toast } from "react-toastify"
 import { Offer } from "../types/offer.type"
 import { Application } from "../types/application.type"
+import { offertemplate } from "../components/Recrutercomponents/CreateOffer"
 
-export const Postoffer = async (offer :Offer, settitle:any, setcom:any) => {
+export const Postoffer = async (offer :Offer, setcompany:any) => {
     
-    console.log(offer)
+    offer.Posting_date = new Date().toDateString()
     try {
         const res  = await fetch(`${BackEndUrl}/offer`, 
         {
@@ -20,8 +21,7 @@ export const Postoffer = async (offer :Offer, settitle:any, setcom:any) => {
         if (res.ok)
             {
                 toast("offer created succesfully")
-                settitle("")
-                setcom("")
+                setcompany(offertemplate())
             }
         else
         {

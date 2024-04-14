@@ -24,7 +24,7 @@ const Apply = () => {
                 email,
                 name,
                 phonenumber: phone,
-            });
+            },navigate);
     
     };
 

@@ -50,7 +50,7 @@ export const Getoffer = async (setjobs: React.Dispatch<React.SetStateAction< Off
 }
 
 
-export const apllytojob = async (creds :Application) => {
+export const apllytojob = async (creds :Application, navigate:any) => {
     try 
     {
         const res  = await fetch(`${BackEndUrl}/offer/Apply`, 
@@ -65,6 +65,7 @@ export const apllytojob = async (creds :Application) => {
         if (res.ok)
             {
                 toast("apllication in success")
+                navigate("/")
             }
         else
         {

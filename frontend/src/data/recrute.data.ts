@@ -9,7 +9,6 @@ export const getrecruteroffers = async (setOffers:any , offset = 0) =>
         if (res.ok)
             {
                 setOffers(await res.json())
-                toast("offers success")
             }
         else
             toast.error(res.statusText)

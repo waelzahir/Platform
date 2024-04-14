@@ -33,22 +33,7 @@ export const Postoffer = async (offer :Offer, setcompany:any) => {
         toast.error("network error")
     }
 }
-export const deleteoffer = async (offer_id:number) => {
-    try {
-        const res  = await fetch(`${BackEndUrl}/offer/${offer_id}`, 
-            {
-                method: "DELETE",
-                credentials: "include",
-            })
-        if (res.ok)
-            toast("offer deleted succesfully")
-        else
-        toast.error(res.statusText)
-    }
-    catch {
-        toast.error("network error")
-    }
-}
+
 export const Getoffer = async (setjobs: React.Dispatch<React.SetStateAction< Offer [] | null>>, offset= 0, type = "" , search = "" ) =>
 {
     const query = `?offset=${offset}&type=${type}&search=${search}`
@@ -80,7 +65,6 @@ export const apllytojob = async (creds :Application) => {
         if (res.ok)
             {
                 toast("apllication in success")
-
             }
         else
         {

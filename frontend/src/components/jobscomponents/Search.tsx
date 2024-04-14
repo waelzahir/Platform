@@ -1,44 +1,51 @@
-import { useState } from "react"
+import { useState } from "react";
 
-export const JobSearch = ({settypequery,setserchquery,setSearch, setofsset}:{settypequery:any,setserchquery:any,setSearch:any, setofsset:any}) => {
-    const [serch, setsearch] = useState("")
-    const [type, settype] = useState("title")
-    const takeaction = () =>{
-        console.log("click")
-        settypequery(type)
-        setserchquery(serch)
-        setSearch((p:boolean) => !p)
-        setofsset(0)
-    }
+export const JobSearch = ({ settypequery, setserchquery, setSearch, setofsset }: { settypequery: any, setserchquery: any, setSearch: any, setofsset: any }) => {
+    const [searchQuery, setSearchQuery] = useState("");
+    const [type, setType] = useState("title");
+
+    const handleSearch = () => {
+        settypequery(type);
+        setserchquery(searchQuery);
+        setSearch((prevState: boolean) => !prevState);
+        setofsset(0);
+    };
 
     return (
-        <div className="w-full flex   items-center justify-center   mt-5">
-            <div className="flex w-[90%]  flex-row justify-evenly gap-x-6 items-center rounded border-2   ">
-            <div className="flex flex-row  justify-evenly items-center  w-96">
-                    <h1 className="">Search Query:</h1>
-                    <input className="rounded h-10 text-center" onChange={(e) => setsearch(e.target.value)} value={serch} placeholder="  job / company"></input>
-
+        <div className="w-full flex items-center justify-center mt-5">
+            <div className="flex w-[90%] flex-row justify-between gap-x-6 items-center rounded-lg border border-gray-300 p-4">
+                <div className="flex items-center">
+                    <label className="mr-4 font-semibold">Search Query:</label>
+                    <input
+                        type="text"
+                        className="w-72 h-10 px-4 rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        placeholder="Enter job title or company"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                 </div>
-                <div className="flex flex-row w-96 justify-evenly items-center">
-                    <TypeButton type={type} typesetter={settype} typetext="title"/>
-                    <TypeButton type={type} typesetter={settype} typetext="Company"/>
+                <div className="flex items-center space-x-4">
+                    <TypeButton type={type} setType={setType} buttonText="title" />
+                    <TypeButton type={type} setType={setType} buttonText="Company" />
                 </div>
-                <div onClick={takeaction} className=" flex justify-center items-center  w-32 h-10 rounded mt-5 hover:bg-green-950 bg-green-700   mb-5 cursor-pointer">
-                    <h1 className="font-bold text-white">
-                            Find Jobs
-                    </h1>
-                </div>
+                <button
+                    className="px-6 py-2 rounded  bg-green-500 text-white font-semibold hover:bg-green-600"
+                    onClick={handleSearch}
+                >
+                    search
+                </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-
-const TypeButton = ({type, typesetter, typetext}:{type: string,typesetter:React.Dispatch<React.SetStateAction<string>>,typetext:string  }) =>
-{
+const TypeButton = ({ type, setType, buttonText }: { type: string, setType: any, buttonText: string }) => {
     return (
-        <div onClick={() => typetext !== type && typesetter(typetext)} className={`${type ===typetext ? "bg-green-700 " : "cursor-pointer border-2"} h-10 rounded min-w-[100px] flex items-center justify-center`}>
-            {typetext.length === 0 ? "none" : "by "  + typetext}
-        </div>
-    )
-}
+        <button
+            className={`px-4 py-2 w-36 rounded  ${type === buttonText ? "bg-green-500 text-white" : "bg-gray-200"}`}
+            onClick={() => setType(buttonText)}
+        >
+            {buttonText}
+        </button>
+    );
+};

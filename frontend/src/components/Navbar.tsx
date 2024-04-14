@@ -1,79 +1,77 @@
-import { useContext } from "react"
-import {  USERContext } from "../Context/Authcontext"
-import { Link } from "react-router-dom"
-import { logout } from "../data/auth"
-import { User } from "../types/user.type"
+import { useContext } from "react";
+import { USERContext } from "../Context/Authcontext";
+import { Link } from "react-router-dom";
+import { logout } from "../data/auth";
+import { User } from "../types/user.type";
 
-const Navbar = ({setUser}:{setUser:React.Dispatch<React.SetStateAction<User | null>>}) =>
-{
-    const user = useContext(USERContext)
-    let buttons;
-    if (user && user?.accounttype === "recruter")
-        buttons = <Recruterbuttons user={user} setUser={setUser}/>
-    else  if (user && user?.accounttype === "applicant")
-        buttons = <Applicantbuttons user={user} setUser={setUser}/>
-    else
-        buttons = <Unothorized />
-    
-    return (
-       buttons
-    )
-}
-const Applicantbuttons = ({user, setUser} : {user :User, setUser : any}) =>
-{
-    return (
-        <div className="h-20  border-b-2 w-full flex fles-row items-center justify-end">
-            <div className="flex flex-row justify-evenly w-96 items-center mr-6">
-                <div  className=" h-10  flex justify-center items-center ">
-                    <h1 className="p-2 w-40 truncate text-center font-bold">
-                        {user.Username}
-                    </h1>   
-                </div>
-                <div onClick={() => {logout(setUser)}} className="w-20 h-10  rounded bg-gray-400 hover:bg-gray-700 flex justify-center items-center font-bold cursor-pointer">
-                        Logout
-                </div>
-            </div>
-        </div>
+const Navbar = ({ setUser }: { setUser: React.Dispatch<React.SetStateAction<User | null>> }) => {
+  const user = useContext(USERContext);
 
+  const buttons = user ? (
+    user.accounttype === "recruter" ? (
+      <RecruterButtons user={user} setUser={setUser} />
+    ) : (
+      <ApplicantButtons user={user} setUser={setUser} />
     )
-}
+  ) : (
+    <Unauthorized />
+  );
 
-const Recruterbuttons = ({user, setUser} : {user :User, setUser : any}) =>
-{
-    return (
-        <div className="h-20  border-b-2 w-full flex fles-row items-center justify-between">
-            <Link to={"/Recruter"}>
-                <div  className=" h-10 ml-6 rounded bg-gray-400 hover:bg-gray-500 flex justify-center items-center font-bold ">
-                    <h1 className="p-2 max-w-[300px] truncate">
-                            Recruter Dashboard
-                    </h1>   
-                </div>
-            </Link>
-            <div className="flex flex-row justify-evenly w-96 items-center mr-6">
-                <div  className=" h-10  flex justify-center items-center ">
-                    <h1 className="p-2 w-40 truncate text-center font-bold">
-                        {user.Username}
-                    </h1>   
-                </div>
-                <div onClick={() => {logout(setUser)}} className="w-20 h-10  rounded bg-gray-400 hover:bg-gray-500 flex justify-center items-center font-bold cursor-pointer">
-                        Logout
-                </div>
-            </div>
-        </div>
-    )
-}
+  return (
+    <nav className="flex justify-end items-center h-20 px-4 bg-gray-800 text-white">
+      {buttons}
+    </nav>
+  );
+};
 
-const Unothorized = () => 
-{
-    return (
-        <div className="h-20 border-b-2 w-full flex fles-row items-center justify-end">
-           
-                <div  className="w-20 h-10 mr-6 rounded bg-green-600 flex justify-center items-center font-bold">
-                    <Link to={"/authentication"}>
-                        Login
-                    </Link>
-                </div>
-        </div>
-    )
-}
-export default Navbar
+const ApplicantButtons = ({ user, setUser }: { user: User; setUser: any }) => {
+  return (
+    <div className="flex items-center space-x-4">
+      <h1 className="text-xl font-bold truncate mr-4">{user.Username}</h1>
+      <Link to={"/"}>
+        <button
+          onClick={() => logout(setUser)}
+          className="text-sm px-3 py-2 rounded bg-green-500 hover:bg-green-700 "
+        >
+          Logout
+        </button>
+      </Link>
+    </div>
+  );
+};
+
+const RecruterButtons = ({ user, setUser }: { user: User; setUser: any }) => {
+  return (
+    <div className="w-full flex justify-between items-center space-x-4">
+      <Link
+        to="/recruiter"
+        className="text-xl font-bold truncate underline hover:text-green-700 mr-4"
+      >
+      Dashboard
+      </Link>
+      <div className="flex flex-row w-52 justify-between">
+          <h1 className="text-xl font-bold truncate">{user.Username}</h1>
+          <Link to={"/"}>
+            <button
+              onClick={() => logout(setUser)}
+              className="text-sm px-3 py-2 rounded bg-green-500 hover:bg-green-700 "
+              >
+              Logout
+            </button>
+          </Link>
+      </div>
+    </div>
+  );
+};
+
+const Unauthorized = () => {
+  return (
+    <div className="flex items-center space-x-4 ">
+      <Link to="/authentication" className="text-sm px-3 py-2 rounded bg-green-500 hover:bg-green-700 ">
+        Login
+      </Link>
+    </div>
+  );
+};
+
+export default Navbar;

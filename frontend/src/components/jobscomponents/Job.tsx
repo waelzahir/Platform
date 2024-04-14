@@ -1,118 +1,54 @@
-import { Link } from "react-router-dom"
-import { Offer } from "../../types/offer.type"
+import { Link } from "react-router-dom";
+import { Offer } from "../../types/offer.type";
 
-const Job = ({jobs, index}: {jobs:Offer[] | null, index:number}) =>
-{
+const Job = ({ jobs, index }: { jobs: Offer[] | null, index: number }) => {
     if (!jobs)
-            return <Error message="no listing"/>
+        return <Error message="No listing" />;
     if (jobs.length <= index || index < 0)
-            return <Error message="Wrong entry"/>
+        return <Error message="Wrong entry" />;
+
+    const job = jobs[index];
+
     return (
-        <div className="  w-full">
-            <div className="min-h-9  mt-4 border-2 w-[99%]">
-            <div className="mt-3 ml-3 w-full">
-                <h1 className="text-2xl w-full text-center">
-                    {jobs[index].Job_title}
-                </h1>
-                <div className="font-mono w-full text-center">
-                    {jobs[index].Employer}
+        <div className="flex-1 mx-auto mt-4">
+            <div className="bg-white shadow-md rounded-lg p-6">
+                <h1 className="text-2xl text-center font-bold mb-4">{job.Job_title}</h1>
+                <p className="text-gray-700 text-sm text-center mb-4">{job.Employer}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <JobDetail label="Posted" value={job.Posting_date} />
+                    <JobDetail label="Headquarters" value={job.Company_location} />
+                    <JobDetail label="Company Description" value={job.Company_description} />
+                    <JobDetail label="Job Location" value={job.Job_Location} />
+                    <JobDetail label="Wages" value={job.Wages} />
+                    <JobDetail label="Experience Required" value={job.Experience} />
+                    <JobDetail label="Job Description" value={job.description} />
+                    <JobDetail label="Responsibilities" value={job.role_Responsibilities} />
+                    <JobDetail label="Requirements" value={job.role_Requirements} />
+                    <JobDetail label="Starting Date" value={job.Start_date} />
                 </div>
-                <div className="font-mono w-full text-center">
-                    posted: {jobs[index].Posting_date}
-                </div>
-            </div>
-            <div className="mt-3 ml-3">
-                <h1 className="text-xl">
-                    HeadQuarters
-                </h1>
-                <div className="font-mono">
-                {jobs[index].Company_location}
-                </div>
-            </div>
-            <div className="mt-3 ml-3">
-                <h1 className="text-xl">
-                    Company Description
-                </h1>
-                <div className="font-mono">
-                    {jobs[index].Company_description}
-                </div>
-            </div>
-            <div className="mt-3 ml-3">
-                <h1 className="text-xl">
-                    Job Location
-                </h1>
-                <div className="font-mono">
-                    {jobs[index].Job_Location}
-                </div>
-            </div>
-            <div className="mt-3 ml-3">
-                <h1 className="text-xl">
-                    Wages
-                </h1>
-                <div className="font-mono">
-                    {jobs[index].Wages}
-                </div>
-            </div>
-            <div className="mt-3 ml-3">
-                <h1 className="text-xl">
-                    Experience Required
-                </h1>
-                <div className="font-mono">
-                    {jobs[index].Experience}
-                </div>
-            </div>
-            <div className="mt-3 ml-3">
-                <h1 className="text-xl">
-                    job Description
-                </h1>
-                <div className="font-mono">
-                    {jobs[index].description}
-                </div>
-            </div>
-            <div className="mt-3 ml-3">
-                <h1 className="text-xl">
-                    Responsibilities
-                </h1>
-                <div className="font-mono">
-                    {jobs[index].role_Responsibilities}
-                </div>
-            </div>
-            <div className="mt-3 ml-3">
-                <h1 className="text-xl">
-                    Requirements
-                </h1>
-                <div className="font-mono">
-                    {jobs[index].role_Requirements}
-                </div>
-            </div>
-            <div className="mt-3 ml-3">
-                <h1 className="text-xl">
-                    starting date
-                </h1>
-                <div className="font-mono bg-white">
-                    {jobs[index].Start_date}
-                </div>
-            </div>
-            <div className="w-full flex justify-center items-center mb-5">
-                    <Link className="" to={`/application/${jobs[index].id}`}>
-                        <button className=" w-32 h-10 rounded mt-5 bg-green-950 text-white">
-                            Apply
+                <div className="flex justify-center mt-6">
+                    <Link to={`/application/${job.id}`}>
+                        <button className="w-full md:w-auto px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:bg-green-700">
+                            Apply Now
                         </button>
                     </Link>
+                </div>
             </div>
-            </div>
-
-
         </div>
-    )
-}
+    );
+};
 
-const Error = ({message}:{message:string}) =>
-{
-    return (
-        <div className="w-full h-32 font-bold flex justify-center items-center">
-            {message}
-        </div>
-    )
-} 
-export default Job
+const JobDetail = ({ label, value }: { label: string, value: string | undefined }) => (
+    <div>
+        <h2 className="text-lg font-semibold">{label}</h2>
+        <p className="text-gray-700">{value}</p>
+    </div>
+);
+
+const Error = ({ message }: { message: string }) => (
+    <div className="max-w-xl mx-auto mt-4 bg-red-200 text-red-700 p-4 rounded-lg text-center">
+        {message}
+    </div>
+);
+
+export default Job;

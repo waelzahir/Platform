@@ -26,16 +26,23 @@ const Navbar = ({ setUser }: { setUser: React.Dispatch<React.SetStateAction<User
 
 const ApplicantButtons = ({ user, setUser }: { user: User; setUser: any }) => {
   return (
-    <div className="flex items-center space-x-4">
-      <h1 className="text-xl font-bold truncate mr-4">{user.Username}</h1>
-      <Link to={"/"}>
-        <button
-          onClick={() => logout(setUser)}
-          className="text-sm px-3 py-2 rounded bg-green-500 hover:bg-green-700 "
-        >
-          Logout
-        </button>
-      </Link>
+    <div className="w-full flex justify-between items-center space-x-4">
+      <div>
+        <Link to={"/"} className="text-xl font-bold truncate underline hover:text-green-700 mr-4">
+          Home
+        </Link>
+      </div>
+      <div className="flex flex-row w-52 justify-between">
+          <h1 className="text-xl font-bold truncate">{user.Username}</h1>
+          <Link to={"/"}>
+            <button
+              onClick={() => logout(setUser)}
+              className="text-sm px-3 py-2 rounded bg-green-500 hover:bg-green-700 "
+              >
+              Logout
+            </button>
+          </Link>
+      </div>
     </div>
   );
 };
@@ -43,12 +50,17 @@ const ApplicantButtons = ({ user, setUser }: { user: User; setUser: any }) => {
 const RecruterButtons = ({ user, setUser }: { user: User; setUser: any }) => {
   return (
     <div className="w-full flex justify-between items-center space-x-4">
-      <Link
-        to="/recruiter"
-        className="text-xl font-bold truncate underline hover:text-green-700 mr-4"
-      >
-      Dashboard
-      </Link>
+      <div>
+        <Link to={"/"} className="text-xl font-bold truncate underline hover:text-green-700 mr-4">
+          Home
+        </Link>
+        <Link
+          to="/recruiter"
+          className="text-xl font-bold truncate underline hover:text-green-700 mr-4"
+          >
+        Dashboard
+        </Link>
+      </div>
       <div className="flex flex-row w-52 justify-between">
           <h1 className="text-xl font-bold truncate">{user.Username}</h1>
           <Link to={"/"}>

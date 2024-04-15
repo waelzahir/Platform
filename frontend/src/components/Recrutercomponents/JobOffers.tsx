@@ -1,13 +1,18 @@
+import { useEffect } from "react";
 import { Offer } from "../../types/offer.type";
 
 export const JobOffers = ({ offers, ofsset, setofsset, setindex, index }: { offers: Offer[] | null; ofsset: number; setofsset: any; setindex: any, index:number }) => {
+  useEffect(() => {
+    setindex(0)
+
+  }, [ofsset])
   if (!offers) return null;
 
   return (
     <div className="flex flex-col w-full bg-white rounded-lg shadow-md px-4 py-4">
       <div className="mt-4">
         {offers.map((o: Offer, inde: number) => (
-          <ROfferListing offer={o} clickfun={() => setindex(inde)} key={o.id} highlight={inde === index} />
+          <ROfferListing offer={o} clickfun={() => setindex(inde)} key={inde + "listing"} highlight={inde === index} />
         ))}
       </div>
       <div className="flex justify-between items-center h-10 border-t border-gray-200">

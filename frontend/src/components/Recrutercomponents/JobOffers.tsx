@@ -15,7 +15,7 @@ export const JobOffers = ({ offers, ofsset, setofsset, setindex, index }: { offe
           <ROfferListing offer={o} clickfun={() => setindex(inde)} key={inde + "listing"} highlight={inde === index} />
         ))}
       </div>
-      <div className="flex justify-between items-center h-10 border-t h-20 border-gray-200">
+      <div className="flex justify-between items-center  border-t h-20 border-gray-200">
         {ofsset === 0 ? null : (
           <button
             onClick={() => setofsset((i: number) => i - 1)}

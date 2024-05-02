@@ -1,4 +1,13 @@
 services:
+  front:
+    build: frontend/
+    container_name: frontend
+    ports:
+      - 80:80
+    networks:
+      app:
+    restart: always
+
   back:
     build: backend/
     container_name: backend
@@ -8,12 +17,7 @@ services:
       - .env
     networks:
       app:
-  front:
-    build: frontend/
-    container_name: frontend
-    ports:
-      - 80:80
-    networks:
-      app:
+    restart: always
+
 networks:
   app:

@@ -15,11 +15,11 @@ export const JobOffers = ({ offers, ofsset, setofsset, setindex, index }: { offe
           <ROfferListing offer={o} clickfun={() => setindex(inde)} key={inde + "listing"} highlight={inde === index} />
         ))}
       </div>
-      <div className="flex justify-between items-center h-10 border-t border-gray-200">
+      <div className="flex justify-between items-center h-10 border-t h-20 border-gray-200">
         {ofsset === 0 ? null : (
           <button
             onClick={() => setofsset((i: number) => i - 1)}
-            className="px-2 py-1 text-gray-500 hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-lg"
+            className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 focus:outline-none"
           >
             Previous
           </button>
@@ -28,7 +28,7 @@ export const JobOffers = ({ offers, ofsset, setofsset, setindex, index }: { offe
         {offers.length !== 10 ? null : (
           <button
             onClick={() => setofsset((i: number) => i + 1)}
-            className="px-2 py-1 text-gray-500 hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-lg"
+            className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 focus:outline-none"
           >
             Next
           </button>

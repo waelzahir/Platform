@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, 
 import { OfferService } from './offer.service';
 import {  Applicant, Recruter } from 'src/common/decorators/role.decorator';
 import { GetCurrentUser } from 'src/common/decorators/Auth.decorators';
-import { log } from 'console';
 import { Public } from 'src/common/decorators/public.decorator';
 import { applyDto } from 'src/common/Dtos/apply.Dto';
 
@@ -40,6 +39,7 @@ export class OfferController {
   @Recruter()
   async GetMyOffers(@GetCurrentUser('id') recruter:number, @Query("offset") offset:number)
   {
-    return await this.offerService.getMyOffers(recruter, offset);
+    const index = !Number.isNaN(offset) && offset > 0  ? offset : 0;
+    return await this.offerService.getMyOffers(recruter, index);
   }
 }
